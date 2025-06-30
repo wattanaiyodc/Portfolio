@@ -27,7 +27,7 @@ export default function Navbar() {
   const menuItems = [
     { href: '/', label: 'หน้าแรก' },
     { href: '/about', label: 'เกี่ยวกับ' },
-    { href: '/projects', label: 'ผลงาน' },
+    { href: '/portfolio', label: 'ผลงาน' },
     { href: '/skills', label: 'ทักษะ' },
     { href: '/contact', label: 'ติดต่อ' }
   ];
