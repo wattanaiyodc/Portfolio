@@ -130,13 +130,7 @@ export default function Home() {
               </motion.span>
             </motion.h1>
             
-            <motion.p 
-              className="text-xl text-gray-300 leading-relaxed"
-              variants={fadeInUp}
-              transition={{ delay: 0.3 }}
-            >
-              Next.js + Tailwind CSS + React
-            </motion.p>
+          
             
             <motion.p 
               className="text-gray-400 max-w-lg"
@@ -215,7 +209,7 @@ export default function Home() {
                   }}
                   transition={{ duration: 0.5 }}
                 >
-                  👨‍💻
+                <img src="/images/profile/Me.jpg" alt="Profile" />
                 </motion.div>
               </motion.div>
             </motion.div>

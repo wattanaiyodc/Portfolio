@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, Code, Cpu, Github, ExternalLink, Zap, Sparkles, Calendar, Users, Star } from 'lucide-react';
+import { ChevronRight, Code, Cpu, Github, ExternalLink, Zap, Sparkles, Calendar, Users, Star, Lock, ChevronLeft, X, Image } from 'lucide-react';
 
 type ProjectSection = 'software' | 'hardware';
 
@@ -13,19 +13,20 @@ interface ProjectDetails {
 }
 
 interface Project {
-  id: number;
+  id: string;
   title: string;
   description: string;
   tech: string[];
   color: string;
   icon: React.JSX.Element;
   image: string;
+  gallery?: string[];
   status: string;
   duration: string;
   team: string;
   details: ProjectDetails;
-  github: string;
-  demo: string;
+  github?: string; // เปลี่ยนเป็น optional
+  demo?: string;   // เปลี่ยนเป็น optional
 }
 
 const Portfolio = () => {
@@ -34,6 +35,8 @@ const Portfolio = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -44,17 +47,23 @@ const Portfolio = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // 🎯 Dynamic Projects Data
+  // 🎯 Dynamic Projects Data with Separated IDs
   const projectsData: Record<ProjectSection, Project[]> = {
     software: [
       {
-        id: 1,
+        id: "SW-001",
         title: "AI-Powered Web App",
         description: "เว็บแอปพลิเคชันที่ใช้ AI ในการวิเคราะห์ข้อมูลและให้คำแนะนำแบบ Real-time",
         tech: ["React", "Node.js", "Python", "TensorFlow"],
         color: "from-purple-500 to-pink-500",
         icon: <Sparkles className="w-6 h-6" />,
         image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
+        gallery: [
+                    "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop",
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=400&fit=crop"
+                  ],
         status: "Completed",
         duration: "3 เดือน",
         team: "4 คน",
@@ -74,7 +83,7 @@ const Portfolio = () => {
         demo: "https://ai-web-app-demo.com"
       },
       {
-        id: 2,
+        id: "SW-002",
         title: "E-Commerce Platform",
         description: "แพลตฟอร์มการค้าออนไลน์ที่มีระบบการชำระเงินและการจัดการสินค้าครบครัน",
         tech: ["Next.js", "Stripe", "PostgreSQL", "Redis"],
@@ -96,11 +105,10 @@ const Portfolio = () => {
           challenges: "การจัดการ state ที่ซับซ้อนและการ optimize performance สำหรับผู้ใช้จำนวนมาก",
           results: "กำลังพัฒนา MVP สำหรับ Beta Testing"
         },
-        github: "https://github.com/username/ecommerce-platform",
-        demo: "https://ecommerce-demo.com"
+        // ไม่มี github และ demo
       },
       {
-        id: 3,
+        id: "SW-003",
         title: "Real-time Chat App",
         description: "แอปพลิเคชันแชทที่รองรับการสื่อสารแบบ Real-time พร้อมระบบ Video Call",
         tech: ["Socket.io", "WebRTC", "MongoDB", "Express"],
@@ -122,88 +130,126 @@ const Portfolio = () => {
           challenges: "การจัดการ WebRTC connections และการ sync ข้อมูลแบบ real-time",
           results: "รองรับผู้ใช้พร้อมกันได้มากกว่า 1000 คน"
         },
-        github: "https://github.com/username/chat-app",
-        demo: "https://chat-app-demo.com"
+        demo: "https://chat-app-demo.com" // มีแค่ demo ไม่มี github
       }
     ],
     hardware: [
       {
-        id: 4,
-        title: "IoT Smart Home System",
-        description: "ระบบบ้านอัจฉริยะที่ควบคุมผ่านแอปมือถือ รองรับ Voice Command",
-        tech: ["Arduino", "ESP32", "Flutter", "Firebase"],
+        id: "HW-001",
+        title: "Tic-Tac-Toe",
+        description: "Tic-Tac-Toe เป็นเกมกระดาน 3x3 สำหรับผู้เล่น 2 คน ผลัดกันวาง X และ O เป้าหมายคือเรียงสัญลักษณ์ให้ได้ 3 ตัวติดกันในแนวนอน แนวตั้ง หรือแนวทแยง",
+        tech: ["KUKA Robot", "Python" , "CV" , "Node.js" , "PLC"],
         color: "from-orange-500 to-red-500",
         icon: <Cpu className="w-6 h-6" />,
-        image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&h=400&fit=crop",
+        image: "/images/Tic-Tac-Toe/board.jpg",
+        gallery: [
+                 
+                 ],
         status: "Completed",
-        duration: "4 เดือน",
-        team: "2 คน",
-        details: {
-          overview: "ระบบบ้านอัจฉริยะที่ครบครันสำหรับควบคุมอุปกรณ์ต่างๆ ในบ้านผ่านแอปมือถือและเสียง",
-          features: [
-            "ควบคุมไฟและปลั๊กไฟ",
-            "ระบบรักษาความปลอดภัย",
-            "เซ็นเซอร์อุณหภูมิและความชื้น",
-            "Voice Control ด้วย Google Assistant",
-            "Mobile App สำหรับ iOS และ Android"
-          ],
-          challenges: "การจัดการ network latency และการ sync ข้อมูลระหว่างอุปกรณ์หลายตัว",
-          results: "ประหยัดพลังงานได้ 30% และเพิ่มความสะดวกสบายในการใช้ชีวิต"
-        },
-        github: "https://github.com/username/smart-home",
-        demo: "https://smart-home-demo.com"
-      },
-      {
-        id: 5,
-        title: "Autonomous Robot",
-        description: "หุ่นยนต์อัตโนมัติที่สามารถหลีกเลี่ยงสิ่งกีดขวางและทำงานตามคำสั่งได้",
-        tech: ["Raspberry Pi", "OpenCV", "Python", "TensorFlow Lite"],
-        color: "from-indigo-500 to-purple-500",
-        icon: <Cpu className="w-6 h-6" />,
-        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=400&fit=crop",
-        status: "In Progress",
-        duration: "5 เดือน",
+        duration: "3 เดือน",
         team: "3 คน",
         details: {
-          overview: "หุ่นยนต์อัตโนมัติที่ใช้ Computer Vision และ AI ในการนำทางและทำงานต่างๆ",
+          overview: "เกม XO นี้เป็นเกมกระดาน 3x3 ที่ผู้เล่นจะได้เล่นกับหุ่นยนต์ โดยฝั่งหุ่นยนต์มีระบบ AI ช่วยวิเคราะห์และตัดสินใจวางหมาก เพื่อท้าทายความสามารถของผู้เล่นในแต่ละตา ทำให้เกมมีความสนุกและท้าทายมากขึ้น",
           features: [
-            "Object Detection และ Recognition",
-            "Path Planning Algorithm",
-            "Voice Command Recognition",
-            "Remote Control via Web Interface",
-            "Autonomous Navigation"
+            "เล่นได้ 2 ฝ่าย: ผู้เล่นกับหุ่นยนต์",
+            "หุ่นยนต์ใช้ AI วิเคราะห์และวางหมากอย่างชาญฉลาด",
+            "ระบบแสดงผลบนบอร์ดจริง ทำให้เห็นหมากแต่ละตาชัดเจน",
+            "รองรับการเริ่มเกมใหม่และรีเซ็ตคะแนนได้ง่าย",
+            "อินเทอร์เฟซใช้งานง่าย เหมาะสำหรับผู้เล่นทุกวัย",           
           ],
-          challenges: "การจัดการ real-time processing และการทำ SLAM (Simultaneous Localization and Mapping)",
-          results: "กำลังพัฒนาและทดสอบ prototype"
+          challenges: "การเล่นเกม XO กับคนจริงบางครั้งอาจไม่สะดวก หรือผู้เล่นต้องการคู่ต่อสู้ที่ท้าทายและไม่ซ้ำซาก AI ในหุ่นยนต์จึงต้องมีความสามารถวิเคราะห์และตัดสินใจอย่างชาญฉลาดเพื่อให้เกมสนุกและท้าทาย",
+          results: "พัฒนาระบบ AI บนหุ่นยนต์ที่สามารถคิดและวางหมากได้อย่างมีประสิทธิภาพ ช่วยให้ผู้เล่นได้รับประสบการณ์เล่นเกมที่สมจริง ท้าทาย และเพลิดเพลินในทุกตา"
         },
-        github: "https://github.com/username/autonomous-robot",
-        demo: "https://robot-demo.com"
+        // โปรเจค Hardware อาจไม่มี online demo
       },
       {
-        id: 6,
-        title: "Wearable Health Monitor",
-        description: "อุปกรณ์สวมใส่ติดตามสุขภาพแบบ Real-time พร้อมส่งข้อมูลไปยังแอปมือถือ",
-        tech: ["Arduino Nano", "Bluetooth", "Sensors", "React Native"],
+        id: "HW-002",
+        title: "Jim Toon Game (เกมจิ้มตุ๋น)",
+        description: "มินิเกมที่สร้างมาจากการสั่งการ Auduino",
+        tech: ["Arduino", "C" , "7 Segment" , "IC Timer"],
+        color: "from-orange-500 to-red-500",
+        icon: <Cpu className="w-6 h-6" />,
+        image: "/images/Jim-Toon-Game/module.png",
+        gallery: [
+                  "/images/Jim-Toon-Game/module.png",
+                  "/images/Jim-Toon-Game/circuit_1.png",
+                  "/images/Jim-Toon-Game/circuit_2.png"
+                 ],
+        status: "Completed",
+        duration: "1 เดือน",
+        team: "1 คน",
+        details: {
+          overview: "มินิเกม ที่จะต้องกดปุ่มตามไฟ LED ที่แสดง ณ ขณะนั้น",
+          features: [
+            "สวิตช์เปิด-ปิดระบบ (On/Off Switch)",
+            "ไฟสถานะเริ่มทำงาน",
+            "ปุ่มเริ่มเกม (Start Button)",
+            "ระบบสุ่มไฟขึ้นตามจุดต่าง ๆ",
+            "ระบบจับเวลา",
+            "ระบบนับคะแนนอัตโนมัติ",
+            "เล่นซ้ำได้ทันที",
+          ],
+          challenges: "ผู้เล่นมักเบื่อง่ายกับเกมทั่วไปที่ไม่มีการโต้ตอบแบบเรียลไทม์ หรือไม่มีระบบตอบสนองต่อผู้เล่นอย่างชัดเจน เช่น ไฟ แสง สี เสียง และเวลาจริง",
+          results: "เกมจิ้มตุ่นถูกออกแบบให้มีระบบตอบสนองแบบเรียลไทม์ ผ่านไฟ LED และปุ่มกด โดยมีระบบนับเวลาและคะแนน เพื่อเพิ่มความสนุก ท้าทาย และกระตุ้นการตอบสนองของผู้เล่นในเวลาจำกัด"
+        },
+        // โปรเจค Hardware อาจไม่มี online demo
+      },
+      {
+        id: "HW-003",
+        title: "Temperature Monitor",
+        description: "ระบบติดตามอุณหภูมิแบบ Real-time ด้วย Arduino และ Sensors",
+        tech: ["Arduino", "SHIELD", "LCD Display", "C"],
+        color: "from-indigo-500 to-purple-500",
+        icon: <Cpu className="w-6 h-6" />,
+        image: "/images/temperature/module.png",
+         gallery: [
+                  "/images/temperature/module.png"                
+                 ],
+        status: "Completed",
+        duration: "1 เดือน",
+        team: "1 คน",
+        details: {
+          overview: "ระบบติดตามอุณหภูมิและความชื้นแบบ real-time พร้อมแสดงผลบน LCD และบันทึกข้อมูล",
+          features: [
+            "วัดอุณหภูมิและความชื้น",
+            "แสดงผลบน LCD Display",
+            "บันทึกข้อมูลลง SD Card",
+            "แจ้งเตือนเมื่อเกินค่าที่กำหนด",
+            "ใช้งานได้ 24/7"
+          ],
+          challenges: "การจัดการ sensor calibration และ data logging ที่เสถียร",
+          results: "ความแม่นยำในการวัด ±0.5°C และใช้งานต่อเนื่องได้มากกว่า 6 เดือน"
+        },
+        github: "https://github.com/username/temperature-monitor"
+        // มีแค่ github ไม่มี demo
+      },
+      {
+        id: "HW-004",
+        title: "Automatic Alcohol Dispenser",
+        description: "อุปกรณ์ติดตั้งสำหรับการใช้งาน Alcohol แบบไร้การสัมผัส",
+        tech: ["Arduino Nano", "Servo motor", "Sensors", "C"],
         color: "from-pink-500 to-rose-500",
         icon: <Zap className="w-6 h-6" />,
-        image: "https://images.unsplash.com/photo-1544117519-31a4b719223d?w=800&h=400&fit=crop",
+        image: "/images/alcohol/module.jpg",
+        gallery: [
+                  "/images/alcohol/module.jpg",
+                  "/images/alcohol/circuit.jpg"                 
+                 ],
         status: "Completed",
         duration: "2.5 เดือน",
         team: "2 คน",
         details: {
           overview: "อุปกรณ์สวมใส่สำหรับติดตามสุขภาพที่ส่งข้อมูลแบบ real-time ไปยังแอปมือถือ",
           features: [
-            "วัดอัตราการเต้นของหัวใจ",
-            "ติดตามการออกกำลังกาย",
-            "วัดระดับ SpO2",
-            "แจ้งเตือนเมื่อมีความผิดปกติ",
-            "แบตเตอรี่ใช้งานได้ 7 วัน"
+            "ระบบอัตโนมัติแบบไม่ต้องสัมผัส ช่วยลดการแพร่กระจายของเชื้อโรค",
+            "เซนเซอร์อินฟราเรด ตรวจจับมือได้อย่างแม่นยำ",
+            "วางตั้งพื้นได้",
+            "แจ้งเตือนเมื่อมีความผิดปกติ",           
           ],
-          challenges: "การจัดการ power consumption และความแม่นยำของเซ็นเซอร์",
-          results: "ความแม่นยำในการวัดเทียบเท่าอุปกรณ์ทางการแพทย์ 98%"
+          challenges: "การใช้ขวดแอลกอฮอล์แบบกดร่วมกันเสี่ยงต่อการแพร่เชื้อโรคจากการสัมผัสซ้ำ",
+          results: "เครื่องกดแอลกอฮอล์อัตโนมัติช่วยลดการสัมผัส ใช้งานสะดวก ปลอดภัย เหมาะสำหรับพื้นที่สาธารณะ"
         },
-        github: "https://github.com/username/health-monitor",
-        demo: "https://health-monitor-demo.com"
+        // เป็นโปรเจคที่เป็นความลับหรือของบริษัท ไม่สามารถแชร์ได้
       }
     ]
   };
@@ -225,7 +271,31 @@ const Portfolio = () => {
       setIsTransitioning(false);
     }, 300);
   };
+  
+  const openImageModal = (image: string, index: number) => {
+  setSelectedImage(image);
+  setCurrentImageIndex(index);
+};
 
+  const closeImageModal = () => {
+    setSelectedImage(null);
+  };
+
+  const nextImage = () => {
+    if (selectedProject && selectedProject.gallery) {
+      const nextIndex = (currentImageIndex + 1) % selectedProject.gallery.length;
+      setCurrentImageIndex(nextIndex);
+      setSelectedImage(selectedProject.gallery[nextIndex]);
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedProject && selectedProject.gallery) {
+      const prevIndex = currentImageIndex === 0 ? selectedProject.gallery.length - 1 : currentImageIndex - 1;
+      setCurrentImageIndex(prevIndex);
+      setSelectedImage(selectedProject.gallery[prevIndex]);
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
       {/* Animated Background */}
@@ -317,6 +387,11 @@ const Portfolio = () => {
                         }`}>
                           {project.status}
                         </div>
+
+                        {/* Project ID Badge */}
+                        <div className="absolute top-4 left-4 px-2 py-1 rounded-full text-xs font-mono bg-black/50 text-white border border-white/20">
+                          {project.id}
+                        </div>
                       </div>
 
                       {/* Project Content */}
@@ -362,8 +437,8 @@ const Portfolio = () => {
                             </span>
                           )}
                         </div>
-                      </div>
-
+                      </div>       
+                  
                       {/* Hover Arrow */}
                       <ChevronRight className="absolute top-6 right-6 w-6 h-6 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-500 text-white" />
                     </div>
@@ -372,20 +447,9 @@ const Portfolio = () => {
               </div>
             </>
           ) : (
-            /* Project Details Page */
+           /* Project Details Page */
             <div className="min-h-screen">
-              {/* Back Button */}
-              <div className="container mx-auto px-6 pt-8">
-                <button 
-                  onClick={closeProjectDetails}
-                  className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-300 mb-8 group"
-                >
-                  <ChevronRight className="w-5 h-5 rotate-180 transform group-hover:-translate-x-1 transition-transform duration-300" />
-                  <span className="font-medium">Back to Projects</span>
-                </button>
-              </div>
-
-              {/* Project Header */}
+              {/* Project Header with Back Button Overlay */}
               <div className="relative mb-12">
                 <div className="h-80 relative overflow-hidden">
                   <img 
@@ -395,6 +459,16 @@ const Portfolio = () => {
                   />
                   <div className={`absolute inset-0 bg-gradient-to-br ${selectedProject.color} opacity-60`} />
                   
+                  {/* Floating Back Button - Top Left */}
+                  <button 
+                    onClick={closeProjectDetails}
+                    className="absolute top-6 left-6 z-20 flex items-center space-x-2 px-4 py-2 bg-black/40 backdrop-blur-md rounded-full border border-white/20 text-white hover:bg-black/60 hover:border-white/40 transition-all duration-300 group hover:scale-105"
+                  >
+                    <ChevronRight className="w-4 h-4 rotate-180 transform group-hover:-translate-x-1 transition-transform duration-300" />
+                    <span className="font-medium text-sm">Back</span>
+                  </button>
+
+                 
                   {/* Project Title Overlay */}
                   <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
                     <div className="container mx-auto">
@@ -403,7 +477,12 @@ const Portfolio = () => {
                           {selectedProject.icon}
                         </div>
                         <div>
-                          <h1 className="text-4xl font-bold text-white mb-2">{selectedProject.title}</h1>
+                          <div className="flex items-center space-x-3 mb-2">
+                            <h1 className="text-4xl font-bold text-white">{selectedProject.title}</h1>
+                            <span className="px-3 py-1 rounded-full text-sm font-mono bg-black/50 text-white border border-white/20">
+                              {selectedProject.id}
+                            </span>
+                          </div>
                           <div className="flex items-center space-x-6 text-gray-200">
                             <div className="flex items-center space-x-2">
                               <Calendar className="w-4 h-4" />
@@ -464,6 +543,36 @@ const Portfolio = () => {
                       ))}
                     </div>
                   </div>
+                  {selectedProject?.gallery && selectedProject.gallery.length > 0 && (
+                    <div className="mb-12">
+                      <h2 className="text-3xl font-bold mb-6 text-white flex items-center space-x-3">
+                        <Image className="w-8 h-8" />
+                        <span>Project Gallery</span>
+                      </h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {selectedProject.gallery.map((image, index) => (
+                          <div
+                            key={index}
+                            onClick={() => openImageModal(image, index)}
+                            className="relative group cursor-pointer overflow-hidden rounded-xl bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 transform hover:scale-105"
+                          >
+                            <img
+                              src={image}
+                              alt={`${selectedProject.title} screenshot ${index + 1}`}
+                              className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
+                                  <ExternalLink className="w-6 h-6 text-white" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Challenges & Results */}
                   <div className="grid md:grid-cols-2 gap-12 mb-12">
@@ -477,26 +586,39 @@ const Portfolio = () => {
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
+                  {/* Action Buttons - แสดงเฉพาะปุ่มที่มี link */}
                   <div className="flex flex-wrap gap-4">
-                    <a 
-                      href={selectedProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 font-medium"
-                    >
-                      <Github className="w-5 h-5" />
-                      <span>View Code</span>
-                    </a>
-                    <a 
-                      href={selectedProject.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center space-x-3 px-8 py-4 bg-white/10 rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 transform hover:scale-105 font-medium"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                      <span>Live Demo</span>
-                    </a>
+                    {selectedProject.github && (
+                      <a 
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 font-medium"
+                      >
+                        <Github className="w-5 h-5" />
+                        <span>View Code</span>
+                      </a>
+                    )}
+                    
+                    {selectedProject.demo && (
+                      <a 
+                        href={selectedProject.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-3 px-8 py-4 bg-white/10 rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 transform hover:scale-105 font-medium"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                        <span>Live Demo</span>
+                      </a>
+                    )}
+
+                    {/* ถ้าไม่มีทั้ง github และ demo ให้แสดงข้อความแจ้ง */}
+                    {!selectedProject.github && !selectedProject.demo && (
+                      <div className="flex items-center space-x-3 px-8 py-4 bg-gray-600/20 rounded-xl border border-gray-500/30 font-medium text-gray-400">
+                        <Lock className="w-5 h-5" />
+                        <span>Code & Demo ไม่เปิดเผยต่อสาธารณะ</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -511,7 +633,55 @@ const Portfolio = () => {
         <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse absolute -top-4 -left-4" />
         <div className="w-4 h-4 bg-pink-400 rounded-full animate-bounce absolute -bottom-6 -right-6" />
       </div>
+      {/* Image Modal */}
+  {selectedImage && (
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="relative max-w-6xl max-h-[90vh] w-full flex items-center justify-center">
+        {/* Close Button */}
+        <button
+          onClick={closeImageModal}
+          className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors duration-300"
+        >
+          <X className="w-6 h-6 text-white" />
+        </button>
+
+        {/* Navigation Buttons */}
+        {selectedProject && selectedProject.gallery && selectedProject.gallery.length > 1 && (
+          <>
+            <button
+              onClick={prevImage}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 rounded-full transition-colors duration-300"
+            >
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 rounded-full transition-colors duration-300"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+          </>
+        )}
+
+        {/* Image */}
+              <img
+          src={selectedImage}
+          alt="Project screenshot"
+          className="max-w-full max-h-full object-contain rounded-lg"
+          style={{ width: 'auto', height: 'auto' }}
+        />
+
+        {/* Image Counter */}
+        {selectedProject && selectedProject.gallery && selectedProject.gallery.length > 1 && (
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-black/50 rounded-full text-white text-sm">
+            {currentImageIndex + 1} / {selectedProject.gallery.length}
+          </div>
+        )}
+      </div>
     </div>
+  )}
+      </div>
+      
   );
 };
 
