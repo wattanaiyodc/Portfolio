@@ -4,24 +4,50 @@ import { motion } from 'framer-motion';
 
 export default function About() {
   const skills = [
-    { name: 'React', level: 75, icon: '⚛️' },
-    { name: 'Next.js', level: 70, icon: '🔺' },
-    { name: 'Tailwind CSS', level: 85, icon: '🎨' },
-    { name: 'JavaScript', level: 80, icon: '📜' },
-    { name: 'HTML/CSS', level: 90, icon: '🌐' },
-    { name: 'Git', level: 65, icon: '📚' },
-  ];
+   
+  { name: 'React', level: 50, icon: '⚛️' },            
+  { name: 'Next.js', level: 50, icon: '🌐' },           
+  { name: 'Tailwind CSS', level: 40, icon: '💨' },     
+  { name: 'JavaScript', level: 60, icon: '📜' },        
+  { name: 'Python', level: 60, icon: '🐍' },           
+  { name: 'C', level: 60, icon: '🔵' },                
+  { name: 'C#', level: 70, icon: '🎵' },                       
+  { name: 'Java', level: 80, icon: '☕' },              
+  { name: 'HTML/CSS', level: 50, icon: '🖼️' },         
+  { name: 'Git', level: 40, icon: '🔧' },             
+];
+
 
   const experiences = [
     {
-      year: '2024',
-      title: 'เริ่มต้นเรียนรู้ Web Development',
-      description: 'เริ่มศึกษา HTML, CSS และ JavaScript พื้นฐาน'
+      year: 'ต้นปี 2022',
+      title: 'เริ่มต้นเรียนรู้ ภาษาโปรแกรมเมอร์',
+      description: 'เริ่มศึกษา C'
+    },
+     {
+      year: 'ปลายปี 2022',
+      title: 'เริ่มต้นเรียนรู้ Arduino',
+      description: 'เขียนภาษา C เพื่อควบคุม Arduino'
     },
     {
-      year: '2024',
-      title: 'เรียนรู้ React & Next.js',
-      description: 'เจาะลึก Modern Web Framework และสร้างโปรเจกต์แรก'
+      year: 'ต้นปี 2023',
+      title: 'เรียนรู้ Java , OOP , Javascript , HTML/CSS , Python',
+      description: 'เจาะลึก C และเรียนรู้ภาษาอื่นๆเพิ่มเติม'
+    },
+    {
+      year: 'กลางปี 2023',
+      title: 'ทำโปรเจค Openhouse Tic-Tac-Toe',
+      description: 'เขี่ยน Node.js และ CV '
+    },
+    {
+      year: 'ปลายปี 2023',
+      title: 'เรียนรู้ Database Mysql',
+      description: 'ทฤษฏีเบื่องต้น'
+    },
+    {
+      year: 'กลางปี 2024',
+      title: 'เรียนรู้ C# , .Net 8 framework , PLC , KRL (KUKA Robot Language)',
+      description: 'เริ่มศึกษาเพื่อทำโปรเจคที่ได้รับจากลูกค้าและพัฒนาแอปพลิเคชั่นดังกล่าว'
     },
     {
       year: 'ปัจจุบัน',
@@ -53,7 +79,7 @@ export default function About() {
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Junior Developer ที่หลงใหลในการเรียนรู้เทคโนโลยีใหม่ๆ 
-            และมุ่งมั่นพัฒนาตนเองให้เป็น Full-Stack Developer
+            และมุ่งมั่นพัฒนาตนเองให้เป็น  Full-Stack Developer
           </p>
         </motion.div>
 
@@ -70,7 +96,7 @@ export default function About() {
             <h2 className="text-3xl font-bold text-white mb-6">🚀 เป้าหมายของผม</h2>
             <div className="space-y-4 text-gray-300">
               <p>
-                ผมเริ่มต้นเรียนรู้ Web Development ด้วยความหลงใหลในการสร้างสรรค์
+                ผมเริ่มต้นเรียนรู้การเขียนโปรแกรมด้วยความหลงใหลในการสร้างสรรค์
                 สิ่งใหม่ๆ ที่สามารถแก้ปัญหาและอำนวยความสะดวกให้ผู้คนได้
               </p>
               <p>
@@ -78,8 +104,7 @@ export default function About() {
                 และพร้อมรับความท้าทายใหม่ๆ เพื่อพัฒนาทักษะให้ดียิ่งขึ้น
               </p>
               <p>
-                เป้าหมายของผมคือการเป็น Full-Stack Developer ที่สามารถสร้าง
-                ประสบการณ์ดิจิทัลที่ยอดเยี่ยมให้กับผู้ใช้งาน
+                เป้าหมายของผมคือการสร้างทุกอย่างที่ผมอยากทำให้สำเร็จให้ได้
               </p>
             </div>
           </motion.div>
@@ -99,19 +124,19 @@ export default function About() {
               </div>
               <div className="flex items-center space-x-3">
                 <span className="text-2xl">🎓</span>
-                <span className="text-gray-300">Self-taught Developer</span>
+                <span className="text-gray-300">Graduated with a Bachelor's Degree</span>
               </div>
               <div className="flex items-center space-x-3">
                 <span className="text-2xl">💻</span>
-                <span className="text-gray-300">Frontend Development</span>
+                <span className="text-gray-300">Frontend Development or Backend Development</span>
               </div>
               <div className="flex items-center space-x-3">
                 <span className="text-2xl">🎯</span>
                 <span className="text-gray-300">กำลังหางานแรก</span>
               </div>
               <div className="flex items-center space-x-3">
-                <span className="text-2xl">☕</span>
-                <span className="text-gray-300">Powered by Coffee</span>
+                <span className="text-2xl">🍵</span>
+                <span className="text-gray-300">Powered by Green Tea</span>
               </div>
             </div>
           </motion.div>

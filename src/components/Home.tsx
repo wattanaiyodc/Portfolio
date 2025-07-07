@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Home() {
   // Animation variants
@@ -148,6 +149,7 @@ export default function Home() {
             variants={fadeInUp}
             transition={{ delay: 0.5 }}
           >
+          <Link href="/portfolio">
             <motion.button 
               className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
               whileHover={{ 
@@ -159,7 +161,9 @@ export default function Home() {
             >
               ดูผลงาน
             </motion.button>
+          </Link>
             
+          <Link href="/about">
             <motion.button 
               className="border border-gray-400 hover:border-white text-gray-300 hover:text-white px-6 py-3 rounded-lg font-medium transition-colors"
               whileHover={{ 
@@ -171,6 +175,7 @@ export default function Home() {
             >
               เรียนรู้เพิ่ม
             </motion.button>
+          </Link>
           </motion.div>
         </motion.div>
 
@@ -256,8 +261,8 @@ export default function Home() {
           >
             {/* สถิติ/ไฮไลท์ */}
             {[
-              { number: "10+", text: "โปรเจกต์เล็กๆ", color: "text-blue-400" },
-              { number: "1+", text: "ปีที่เริ่มเรียนรู้", color: "text-green-400" },
+              { number: "5+", text: "โปรเจกต์เล็กๆ", color: "text-blue-400" },
+              { number: "4+", text: "ปีที่เริ่มเรียนรู้", color: "text-green-400" },
               { number: "∞", text: "ความกระตือรือร้น", color: "text-purple-400" }
             ].map((stat, index) => (
               <motion.div 
@@ -311,7 +316,8 @@ export default function Home() {
               className="flex flex-wrap justify-center gap-3"
               variants={containerVariants}
             >
-              {['React', 'Next.js', 'Tailwind CSS', 'JavaScript', 'HTML/CSS', 'Git', 'C#', 'C', 'Python'].map((skill, index) => (
+              {['React', 'Next.js', 'Tailwind CSS', 'Java' , 'JavaScript', 'HTML/CSS', 'Git', 'C#', 'C', 'Python' , 'Node.js' , 'KRL (KUKA Robot Language)' 
+                , 'Motion Robot' , 'PLC' , 'Ladder' , ].map((skill, index) => (
                 <motion.span 
                   key={skill}
                   className="bg-gray-700 text-gray-200 px-4 py-2 rounded-full text-sm hover:bg-gray-600 transition-colors cursor-pointer"

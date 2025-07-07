@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, Code, Cpu, Github, ExternalLink, Zap, Sparkles, Calendar, Users, Star, Lock, ChevronLeft, X, Image } from 'lucide-react';
+import { ChevronRight, Code, Cpu, Github, Gitlab, ExternalLink, Zap, Sparkles, Calendar, Users, Star, Lock, ChevronLeft, X, Image } from 'lucide-react';
 
 type ProjectSection = 'software' | 'hardware';
 
@@ -26,6 +26,7 @@ interface Project {
   team: string;
   details: ProjectDetails;
   github?: string; // เปลี่ยนเป็น optional
+  gitlab?: string; // เปลี่ยนเป็น optional
   demo?: string;   // เปลี่ยนเป็น optional
 }
 
@@ -52,96 +53,45 @@ const Portfolio = () => {
     software: [
       {
         id: "SW-001",
-        title: "AI-Powered Web App",
-        description: "เว็บแอปพลิเคชันที่ใช้ AI ในการวิเคราะห์ข้อมูลและให้คำแนะนำแบบ Real-time",
-        tech: ["React", "Node.js", "Python", "TensorFlow"],
+        title: "KUKA CONTROL VIA APPLICATION",
+        description: "แอปพลิเคชันที่ใช้สำหรับควบคุมการทำงานของ KUKA ",
+        tech: ["C#", ".Net 8 Framework", "OOP", "WPF (MVVM)" , "XAML" , "PLC Communication via S7.Net" , "KRL (KUKA Robot Language)" ],
         color: "from-purple-500 to-pink-500",
         icon: <Sparkles className="w-6 h-6" />,
-        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
+        image: "/images/Software/Kuka_app/App.png",
         gallery: [
-                    "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop",
-                    "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=400&fit=crop"
+                    "/images/Software/Kuka_app/App.png",
+                    "/images/Software/Kuka_app/display.png",
+                    "/images/Software/Kuka_app/measure.png",
+                    "/images/Software/Kuka_app/package.png",
+                    "/images/Software/Kuka_app/config.png"
                   ],
         status: "Completed",
-        duration: "3 เดือน",
-        team: "4 คน",
+        duration: "4 เดือน",
+        team: "3 คน",
         details: {
-          overview: "โปรเจคนี้เป็นเว็บแอปพลิเคชันที่ใช้ปัญญาประดิษฐ์ในการวิเคราะห์ข้อมูลขนาดใหญ่และให้คำแนะนำที่เป็นประโยชน์แก่ผู้ใช้งานแบบ Real-time",
+          overview: "ปัจจุบัน หุ่นยนต์มีบทบาทสำคัญในการเพิ่มประสิทธิภาพการผลิตและคลังสินค้า โดยเฉพาะงานที่ซับซ้อนและซ้ำซาก เช่น การจัดเรียงสินค้า แม้ระบบ HMI และ PLC จะช่วยควบคุมได้สะดวก แต่ยังต้องอาศัยความรู้ด้านเทคนิค และยังไม่ตอบโจทย์การเข้าถึงหรือปรับค่าจากระยะไกล คณะผู้จัดทำจึงพัฒนาแอปพลิเคชันสำหรับจำลองการจัดวางสินค้า และมีแนวคิดเชื่อมต่อกับ PLC เพื่อสั่งงานหุ่นยนต์จริง โดยส่งข้อมูลจากแอปไปยัง PLC เพื่อควบคุมหุ่นยนต์ผ่านภาษา KUKA Robot Language (KRL) และแสดงสถานะการทำงานแบบเรียลไทม์",
           features: [
-            "ระบบวิเคราะห์ข้อมูลด้วย Machine Learning",
-            "Dashboard แสดงผลแบบ Interactive",
-            "API สำหรับ Integration กับระบบอื่น",
-            "ระบบ Authentication และ Authorization",
+            "หน้าจอแสดงรูปแบบการวางสินค้า",
+            "แสดงสถานะการทำงานของ หุ่นยนต์",
+            "เพิ่ม หรือ แก้ไข้ Space และ ขนาดของสินค้า",
+            "หน้าต่างสำหรับจัดวางสินค้าเป็นรูปแบบ Row Column Height",
             "Real-time Notifications"
           ],
-          challenges: "ความท้าทายหลักคือการจัดการข้อมูลขนาดใหญ่และการทำให้ AI model ทำงานได้รวดเร็วบนเว็บแอป",
-          results: "ระบบสามารถประมวลผลข้อมูลได้เร็วขึ้น 70% และมีความแม่นยำ 95%"
+          challenges: "ได้ทดลองเขียน Ladder ของ Siemens และ ภาษา KRL (KUKA Robot Language) ",
+          results: "แอปพลิเคชั่นสามารถส่งข้อมูลไปให้ PLC ได้ และ PLC ทำการส่งข้อมูลที่ได้มาจากแอปพลิเคชั่นส่งไปให้ Robot"
         },
-        github: "https://github.com/username/ai-web-app",
-        demo: "https://ai-web-app-demo.com"
+        gitlab: "https://gitlab.com/wattanai.newgen/final_project/-/tree/software_?ref_type=heads",
+        demo: "/video/Software/Kuka_app/demo.mp4"
       },
       {
         id: "SW-002",
-        title: "E-Commerce Platform",
-        description: "แพลตฟอร์มการค้าออนไลน์ที่มีระบบการชำระเงินและการจัดการสินค้าครบครัน",
-        tech: ["Next.js", "Stripe", "PostgreSQL", "Redis"],
-        color: "from-blue-500 to-cyan-500",
-        icon: <Code className="w-6 h-6" />,
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop",
-        status: "In Progress",
-        duration: "2 เดือน",
-        team: "2 คน",
-        details: {
-          overview: "แพลตฟอร์ม E-Commerce ที่ครบครันสำหรับธุรกิจขนาดกลางถึงใหญ่ พร้อมระบบจัดการที่ทันสมัย",
-          features: [
-            "ระบบจัดการสินค้าและสต็อก",
-            "Payment Gateway Integration",
-            "ระบบจัดการคำสั่งซื้อ",
-            "Analytics Dashboard",
-            "Mobile Responsive Design"
-          ],
-          challenges: "การจัดการ state ที่ซับซ้อนและการ optimize performance สำหรับผู้ใช้จำนวนมาก",
-          results: "กำลังพัฒนา MVP สำหรับ Beta Testing"
-        },
-        // ไม่มี github และ demo
-      },
-      {
-        id: "SW-003",
-        title: "Real-time Chat App",
-        description: "แอปพลิเคชันแชทที่รองรับการสื่อสารแบบ Real-time พร้อมระบบ Video Call",
-        tech: ["Socket.io", "WebRTC", "MongoDB", "Express"],
-        color: "from-green-500 to-teal-500",
-        icon: <Zap className="w-6 h-6" />,
-        image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=400&fit=crop",
-        status: "Completed",
-        duration: "1.5 เดือน",
-        team: "3 คน",
-        details: {
-          overview: "แอปพลิเคชันแชทที่รองรับการสื่อสารแบบ Real-time พร้อมฟีเจอร์ Video Call และ File Sharing",
-          features: [
-            "Real-time Messaging",
-            "Video & Voice Calls",
-            "File Sharing",
-            "Group Chat",
-            "Message Encryption"
-          ],
-          challenges: "การจัดการ WebRTC connections และการ sync ข้อมูลแบบ real-time",
-          results: "รองรับผู้ใช้พร้อมกันได้มากกว่า 1000 คน"
-        },
-        demo: "https://chat-app-demo.com" // มีแค่ demo ไม่มี github
-      }
-    ],
-    hardware: [
-      {
-        id: "HW-001",
         title: "Tic-Tac-Toe",
         description: "Tic-Tac-Toe เป็นเกมกระดาน 3x3 สำหรับผู้เล่น 2 คน ผลัดกันวาง X และ O เป้าหมายคือเรียงสัญลักษณ์ให้ได้ 3 ตัวติดกันในแนวนอน แนวตั้ง หรือแนวทแยง",
-        tech: ["KUKA Robot", "Python" , "CV" , "Node.js" , "PLC"],
+        tech: ["KUKA Robot", "Python" , "CV" , "Node.js" , "PLC" , "AI"],
         color: "from-orange-500 to-red-500",
         icon: <Cpu className="w-6 h-6" />,
-        image: "/images/Tic-Tac-Toe/board.jpg",
+        image: "/images/Hardware/Tic-Tac-Toe/board.jpg",
         gallery: [
                  
                  ],
@@ -163,17 +113,43 @@ const Portfolio = () => {
         // โปรเจค Hardware อาจไม่มี online demo
       },
       {
-        id: "HW-002",
+        id: "SW-003",
+        title: "Portfolio",
+        description: "Website ที่ไว้สำหรับแสดงผลงานและข้อมูลต่างๆของผม",
+        tech: ["Next.js Framework", "Tailwind CSS" , "TypeScript + JSX"],
+        color: "from-green-500 to-teal-500",
+        icon: <Zap className="w-6 h-6" />,
+        image: "/images/Software/Portfolio/Web.png",
+        status: "Progress",
+        duration: "2 สัปดาห์",
+        team: "1 คน",
+        details: {
+          overview: "เว็บไซต์สำหรับโชว์สิ่งที่เกี่ยวกับตัวผม เช่น ที่อยู่ Timeline การศึกษา ผลงาน อื่นๆ",
+          features: [
+            "Overview",
+            "Portfolio",
+            "about me",
+            "Contact",            
+          ],
+          challenges: "ได้ลองเขียนเว็บไซต์ที่เป็น project เล็กๆ",
+          results: "ได้ทั้งทักษะ ความมั่นใจ และโอกาสในการทำงาน! 🎯"
+        },
+        
+      }
+    ],
+    hardware: [
+      {
+        id: "HW-001",
         title: "Jim Toon Game (เกมจิ้มตุ๋น)",
         description: "มินิเกมที่สร้างมาจากการสั่งการ Auduino",
         tech: ["Arduino", "C" , "7 Segment" , "IC Timer"],
         color: "from-orange-500 to-red-500",
         icon: <Cpu className="w-6 h-6" />,
-        image: "/images/Jim-Toon-Game/module.png",
+        image: "/images/Hardware/Jim-Toon-Game/module.png",
         gallery: [
-                  "/images/Jim-Toon-Game/module.png",
-                  "/images/Jim-Toon-Game/circuit_1.png",
-                  "/images/Jim-Toon-Game/circuit_2.png"
+                  "/images/Hardware/Jim-Toon-Game/module.png",
+                  "/images/Hardware/Jim-Toon-Game/circuit_1.png",
+                  "/images/Hardware/Jim-Toon-Game/circuit_2.png"
                  ],
         status: "Completed",
         duration: "1 เดือน",
@@ -195,15 +171,15 @@ const Portfolio = () => {
         // โปรเจค Hardware อาจไม่มี online demo
       },
       {
-        id: "HW-003",
+        id: "HW-002",
         title: "Temperature Monitor",
         description: "ระบบติดตามอุณหภูมิแบบ Real-time ด้วย Arduino และ Sensors",
         tech: ["Arduino", "SHIELD", "LCD Display", "C"],
         color: "from-indigo-500 to-purple-500",
         icon: <Cpu className="w-6 h-6" />,
-        image: "/images/temperature/module.png",
+        image: "/images/Hardware/temperature/module.png",
          gallery: [
-                  "/images/temperature/module.png"                
+                  "/images/Hardware/temperature/module.png"                
                  ],
         status: "Completed",
         duration: "1 เดือน",
@@ -221,30 +197,29 @@ const Portfolio = () => {
           results: "ความแม่นยำในการวัด ±0.5°C และใช้งานต่อเนื่องได้มากกว่า 6 เดือน"
         },
         github: "https://github.com/username/temperature-monitor"
-        // มีแค่ github ไม่มี demo
       },
       {
-        id: "HW-004",
+        id: "HW-003",
         title: "Automatic Alcohol Dispenser",
-        description: "อุปกรณ์ติดตั้งสำหรับการใช้งาน Alcohol แบบไร้การสัมผัส",
+        description: "อุปกรณ์สำหรับใช้งาน Alcohol แบบไร้สัมผัส",
         tech: ["Arduino Nano", "Servo motor", "Sensors", "C"],
         color: "from-pink-500 to-rose-500",
         icon: <Zap className="w-6 h-6" />,
-        image: "/images/alcohol/module.jpg",
+        image: "/images/Hardware/alcohol/module.jpg",
         gallery: [
-                  "/images/alcohol/module.jpg",
-                  "/images/alcohol/circuit.jpg"                 
+                  "/images/Hardware/alcohol/module.jpg",
+                  "/images/Hardware/alcohol/circuit.jpg"                 
                  ],
         status: "Completed",
-        duration: "2.5 เดือน",
-        team: "2 คน",
+        duration: "1 เดือน",
+        team: "1 คน",
         details: {
-          overview: "อุปกรณ์สวมใส่สำหรับติดตามสุขภาพที่ส่งข้อมูลแบบ real-time ไปยังแอปมือถือ",
+          overview: "อุปกรณ์สวมสำหรับใช้งาน Alcohol แบบไร้การสัมผัสโดยใช้ IR sensor ตรวจจับและใช้ Arduino ในการควบคุมการทำงานของ servo motor เพื่อกดขวด alcohol",
           features: [
             "ระบบอัตโนมัติแบบไม่ต้องสัมผัส ช่วยลดการแพร่กระจายของเชื้อโรค",
             "เซนเซอร์อินฟราเรด ตรวจจับมือได้อย่างแม่นยำ",
             "วางตั้งพื้นได้",
-            "แจ้งเตือนเมื่อมีความผิดปกติ",           
+                       
           ],
           challenges: "การใช้ขวดแอลกอฮอล์แบบกดร่วมกันเสี่ยงต่อการแพร่เชื้อโรคจากการสัมผัสซ้ำ",
           results: "เครื่องกดแอลกอฮอล์อัตโนมัติช่วยลดการสัมผัส ใช้งานสะดวก ปลอดภัย เหมาะสำหรับพื้นที่สาธารณะ"
@@ -562,11 +537,7 @@ const Portfolio = () => {
                               className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                             />
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-                              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
-                                  <ExternalLink className="w-6 h-6 text-white" />
-                                </div>
-                              </div>
+                             
                             </div>
                           </div>
                         ))}
@@ -588,17 +559,19 @@ const Portfolio = () => {
 
                   {/* Action Buttons - แสดงเฉพาะปุ่มที่มี link */}
                   <div className="flex flex-wrap gap-4">
-                    {selectedProject.github && (
+                    {selectedProject.gitlab && (
                       <a 
-                        href={selectedProject.github}
+                        href={selectedProject.gitlab}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 font-medium"
                       >
-                        <Github className="w-5 h-5" />
+                        <Gitlab className="w-5 h-5" />
                         <span>View Code</span>
                       </a>
                     )}
+                    
+                    
                     
                     {selectedProject.demo && (
                       <a 
@@ -635,8 +608,9 @@ const Portfolio = () => {
       </div>
       {/* Image Modal */}
   {selectedImage && (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="relative max-w-6xl max-h-[90vh] w-full flex items-center justify-center">
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={closeImageModal}>
+       <div className="relative max-w-6xl max-h-[90vh] w-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}
+      >
         {/* Close Button */}
         <button
           onClick={closeImageModal}
@@ -645,6 +619,7 @@ const Portfolio = () => {
           <X className="w-6 h-6 text-white" />
         </button>
 
+        
         {/* Navigation Buttons */}
         {selectedProject && selectedProject.gallery && selectedProject.gallery.length > 1 && (
           <>
