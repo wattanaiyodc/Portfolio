@@ -82,7 +82,7 @@ const Portfolio = () => {
           results: "แอปพลิเคชั่นสามารถส่งข้อมูลไปให้ PLC ได้ และ PLC ทำการส่งข้อมูลที่ได้มาจากแอปพลิเคชั่นส่งไปให้ Robot"
         },
         gitlab: "https://gitlab.com/wattanai.newgen/final_project/-/tree/software_?ref_type=heads",
-        demo: "/video/Software/Kuka_app/demo.mp4"
+        demo: "https://drive.google.com/file/d/1X1g8JBEPJgcWTGUueYypidSIz-fUEdeU/view?usp=sharing"
       },
       {
         id: "SW-002",
