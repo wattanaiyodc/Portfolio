@@ -157,9 +157,24 @@ const Contact = () => {
               variants={containerVariants}
             >
               {[
-                { icon: Mail, title: "อีเมล", info: "your-email@example.com", color: "bg-blue-500" },
+                { icon: Mail, title: "อีเมล", info: "wattanai.yodc@gmail.com", color: "bg-blue-500" },
                 { icon: Phone, title: "โทรศัพท์", info: "+66 97 001 4690", color: "bg-cyan-500" },
-                { icon: MapPin, title: "ที่อยู่", info: "กรุงเทพมหานคร, ประเทศไทย", color: "bg-indigo-500" }
+                {
+                  icon: MapPin,
+                  title: "ที่อยู่",
+                  info: (
+                    <a
+                      href="https://www.google.com/maps?q=88/2+หมู่ที่+2+ต.บ้านใหม่+อ.ปากเกร็ด+จ.นนทบุรี"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-cyan-400 underline hover:text-cyan-300"
+                    >
+                      88/2 หมู่ที่ 2 ต.บ้านใหม่ อ.ปากเกร็ด จ.นนทบุรี
+                    </a>
+                  ),
+                  color: "bg-indigo-500"
+                }
+
               ].map((item, index) => (
                 <motion.div
                   key={index}
@@ -208,9 +223,8 @@ const Contact = () => {
                 variants={containerVariants}
               >
                 {[
-                  { icon: Github, href: "#", color: "bg-gray-700", label: "GitHub" },
-                  { icon: Linkedin, href: "#", color: "bg-blue-600", label: "LinkedIn" },
-                  { icon: Facebook, href: "#", color: "bg-blue-500", label: "Facebook" }
+                 
+                  { icon: Facebook, href: "https://www.facebook.com/phoenix.yodchan", color: "bg-blue-500", label: "Facebook" }
                 ].map((social, index) => (
                   <motion.a
                     key={index}
