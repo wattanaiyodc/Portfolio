@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, Variants } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Facebook } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Facebook, CheckCircle, AlertCircle } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,17 +13,59 @@ const Contact = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleSubmit = async () => {
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+  setIsSubmitting(true);
+  setSubmitStatus('idle');
+
+  try {
+    if (!formData.name || !formData.email || !formData.message) {
+      setSubmitStatus('error');
       setIsSubmitting(false);
-      alert('ข้อความถูกส่งแล้ว!');
+      return;
+    }
+
+    const response = await fetch('/api/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject || 'ข้อความจากเว็บไซต์',
+        message: formData.message,
+      }),
+    });
+
+    const data = await response.json();
+    console.log('Response:', data);
+
+    if (response.ok) {
+      setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 2000);
-  };
+      document.querySelectorAll('[contenteditable]').forEach((el) => {
+        el.textContent = '';
+      });
+
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 5000);
+    } else {
+      throw new Error(data.error || 'ไม่สามารถส่งข้อความได้');
+    }
+  } catch (error) {
+    console.error('Error sending email:', error);
+    setSubmitStatus('error');
+    setTimeout(() => {
+      setSubmitStatus('idle');
+    }, 5000);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   // Animation variants
   const containerVariants: Variants = {
@@ -101,7 +143,55 @@ const Contact = () => {
           border-color: #3B82F6;
           outline: none;
         }
+
+        .status-message {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          z-index: 1000;
+          padding: 1rem;
+          border-radius: 0.5rem;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .status-success {
+          background: rgba(34, 197, 94, 0.1);
+          color: #22C55E;
+        }
+
+        .status-error {
+          background: rgba(239, 68, 68, 0.1);
+          color: #EF4444;
+        }
       `}</style>
+
+      {/* Status Message */}
+      {submitStatus !== 'idle' && (
+        <motion.div
+          className={`status-message ${submitStatus === 'success' ? 'status-success' : 'status-error'}`}
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.3 }}
+        >
+          {submitStatus === 'success' ? (
+            <>
+              <CheckCircle className="w-5 h-5" />
+              <span>ข้อความถูกส่งเรียบร้อยแล้ว!</span>
+            </>
+          ) : (
+            <>
+              <AlertCircle className="w-5 h-5" />
+              <span>เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>
+            </>
+          )}
+        </motion.div>
+      )}
 
       <motion.div 
         className="max-w-6xl mx-auto"
@@ -174,7 +264,6 @@ const Contact = () => {
                   ),
                   color: "bg-indigo-500"
                 }
-
               ].map((item, index) => (
                 <motion.div
                   key={index}
@@ -223,7 +312,6 @@ const Contact = () => {
                 variants={containerVariants}
               >
                 {[
-                 
                   { icon: Facebook, href: "https://www.facebook.com/phoenix.yodchan", color: "bg-blue-500", label: "Facebook" }
                 ].map((social, index) => (
                   <motion.a
@@ -270,7 +358,9 @@ const Contact = () => {
               >
                 <div className="grid md:grid-cols-2 gap-6">
                   <motion.div variants={slideInLeft} transition={{ delay: 0.3 }}>
-                    <div className="block text-white font-medium mb-2">ชื่อ</div>
+                    <div className="block text-white font-medium mb-2">
+                      ชื่อ <span className="text-red-400">*</span>
+                    </div>
                     <div
                       className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus-blue transition-colors cursor-text"
                       contentEditable
@@ -281,7 +371,9 @@ const Contact = () => {
                   </motion.div>
 
                   <motion.div variants={slideInRight} transition={{ delay: 0.4 }}>
-                    <div className="block text-white font-medium mb-2">อีเมล</div>
+                    <div className="block text-white font-medium mb-2">
+                      อีเมล <span className="text-red-400">*</span>
+                    </div>
                     <div
                       className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus-blue transition-colors cursor-text"
                       contentEditable
@@ -304,7 +396,9 @@ const Contact = () => {
                 </motion.div>
 
                 <motion.div variants={itemVariants} transition={{ delay: 0.6 }}>
-                  <div className="block text-white font-medium mb-2">ข้อความ</div>
+                  <div className="block text-white font-medium mb-2">
+                    ข้อความ <span className="text-red-400">*</span>
+                  </div>
                   <div
                     className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus-blue transition-colors cursor-text min-h-[120px]"
                     contentEditable
