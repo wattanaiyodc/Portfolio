@@ -127,7 +127,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                ผม Junior Developer
+                ผม Wattanai Yodchan 
               </motion.span>
             </motion.h1>
             
@@ -139,7 +139,7 @@ export default function Home() {
               transition={{ delay: 0.4 }}
             >
               กำลังเรียนรู้และพัฒนาทักษะการเขียนโปรแกรม 
-              มุ่งมั่นที่จะสร้างเว็บไซต์ที่สวยงามและใช้งานง่าย
+              มุ่งมั่นที่จะสร้างเว็บไซต์ที่สวยงามและใช้งานง่ายและสนใจในการเขียน Software ต่างๆนอกเหนือจากนี้ด้วย
             </motion.p>
           </motion.div>
           
