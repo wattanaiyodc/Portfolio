@@ -316,8 +316,8 @@ export default function Home() {
               className="flex flex-wrap justify-center gap-3"
               variants={containerVariants}
             >
-              {['React', 'Next.js', 'Tailwind CSS', 'Java' , 'JavaScript', 'HTML/CSS', 'Git', 'C#', 'C', 'Python' , 'Node.js' , 'KRL (KUKA Robot Language)' 
-                , 'Motion Robot' , 'PLC' , 'Ladder' , ].map((skill, index) => (
+              {['React', 'Next.js', 'Tailwind CSS', 'Java' , 'JavaScript', 'HTML/CSS', 'Git', 'C#', 'C', 'Python' , 'Node.js' ,  'OOP' , 'KRL (KUKA Robot Language)'
+                , 'Motion Robot' , 'PLC' , 'Ladder' ].map((skill, index) => (
                 <motion.span 
                   key={skill}
                   className="bg-gray-700 text-gray-200 px-4 py-2 rounded-full text-sm hover:bg-gray-600 transition-colors cursor-pointer"

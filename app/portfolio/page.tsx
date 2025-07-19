@@ -116,7 +116,7 @@ const Portfolio = () => {
         id: "SW-003",
         title: "Portfolio",
         description: "Website ที่ไว้สำหรับแสดงผลงานและข้อมูลต่างๆของผม",
-        tech: ["Next.js Framework", "Tailwind CSS" , "TypeScript + JSX"],
+        tech: ["Next.js Framework", "Tailwind CSS" , "TypeScript + JSX" , "API"],
         color: "from-green-500 to-teal-500",
         icon: <Zap className="w-6 h-6" />,
         image: "/images/Software/Portfolio/Web.png",
