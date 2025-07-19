@@ -7,6 +7,9 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    console.log('API Key exists:', !!process.env.RESEND_API_KEY);
+    console.log('API Key length:', process.env.RESEND_API_KEY?.length);
+    console.log('Resend instance:', !!resend);
     const { name, email, subject, message } = body;
 
     // Validation - เช็คข้อมูลที่จำเป็น
