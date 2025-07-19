@@ -124,7 +124,7 @@ export default function About() {
               </div>
               <div className="flex items-center space-x-3">
                 <span className="text-2xl">🎓</span>
-                <span className="text-gray-300">Graduated with a Bachelor's Degree</span>
+                <span className="text-gray-300">Graduated with a Bachelor&apos;s Degree</span>
               </div>
               <div className="flex items-center space-x-3">
                 <span className="text-2xl">💻</span>
