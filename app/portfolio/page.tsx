@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, Code, Cpu, Gitlab, ExternalLink, Zap, Sparkles, Calendar, Users, Star, Lock, ChevronLeft, X, Image } from 'lucide-react';
+import { ChevronRight, Code, Cpu, Gitlab, Github , ExternalLink, Zap, Sparkles, Calendar, Users, Star, Lock, ChevronLeft, X, Image } from 'lucide-react';
 
 type ProjectSection = 'software' | 'hardware';
 
@@ -120,7 +120,7 @@ const Portfolio = () => {
         color: "from-green-500 to-teal-500",
         icon: <Zap className="w-6 h-6" />,
         image: "/images/Software/Portfolio/Web.png",
-        status: "Progress",
+        status: "Completed",
         duration: "2 สัปดาห์",
         team: "1 คน",
         details: {
@@ -134,6 +134,40 @@ const Portfolio = () => {
           challenges: "ได้ลองเขียนเว็บไซต์ที่เป็น project เล็กๆ",
           results: "ได้ทั้งทักษะ ความมั่นใจ และโอกาสในการทำงาน! 🎯"
         },
+        gitlab : "https://gitlab.com/wattanai.newgen/portfolio"
+      },
+      {
+        id: "SW-004",
+        title: "Todo List API",
+        description: "API สำหรับจัดการข้อมูล Todo List เชื่อมต่อกับ Frontend",
+        tech: [
+          "Next.js Framework (Frontend)",
+          "Tailwind CSS",
+          "TypeScript + JSX",
+          "Node.js + Express (Backend)",
+          "REST API",
+          "Database MongoDB"
+        ],
+        color: "from-green-500 to-teal-500",
+        icon: <Zap className="w-6 h-6" />,
+        image: "/images/Software/Todolist/web.png",
+        status: "Completed",
+        duration: "2 วัน",
+        team: "1 คน",
+        details: {
+          overview: "API ที่ใช้สำหรับสร้าง แก้ไข ลบ และดึงข้อมูล Todo List พร้อมเชื่อมต่อกับ Frontend",
+          features: [
+            "สร้างงาน (Create Task)",
+            "ดึงข้อมูลงานทั้งหมด (Read Tasks)",
+            "แก้ไขงาน (Update Task)",
+            "ลบงาน (Delete Task)",
+            "เชื่อมต่อกับฐานข้อมูล"
+          ],
+          challenges: "ได้ฝึกสร้าง REST API ด้วย Node.js + Express และเชื่อมต่อกับ Frontend ด้วย Next.js",
+          results: "ได้เรียนรู้การทำงานแบบ Fullstack และเข้าใจการเชื่อมต่อ API กับ Frontend และ Backend 🎯"
+        },
+        demo : "https://todolist-project-flax.vercel.app/",
+        github : "https://github.com/wattanaiyodc/todolist-project"
         
       }
     ],
@@ -570,7 +604,20 @@ const Portfolio = () => {
                         <span>View Code</span>
                       </a>
                     )}
-                    
+
+                     {selectedProject.github && (
+                      <a 
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 font-medium"
+                      >
+                        <Github className="w-5 h-5" />
+                        <span>View Code</span>
+                      </a>
+                    )}
+
+                  
                     
                     
                     {selectedProject.demo && (
@@ -586,7 +633,7 @@ const Portfolio = () => {
                     )}
 
                     {/* ถ้าไม่มีทั้ง github และ demo ให้แสดงข้อความแจ้ง */}
-                    {!selectedProject.github && !selectedProject.demo && (
+                    {!selectedProject.github && !selectedProject.gitlab && !selectedProject.demo && (
                       <div className="flex items-center space-x-3 px-8 py-4 bg-gray-600/20 rounded-xl border border-gray-500/30 font-medium text-gray-400">
                         <Lock className="w-5 h-5" />
                         <span>Code & Demo ไม่เปิดเผยต่อสาธารณะ</span>
