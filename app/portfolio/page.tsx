@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, Code, Cpu, Gitlab, Github , ExternalLink, Zap, Sparkles, Calendar, Users, Star, Lock, ChevronLeft, X, Image } from 'lucide-react';
+import { ChevronRight, Code, Cpu, Gitlab, Github , ExternalLink, Zap, Sparkles, Calendar, Users, Star, Lock, ChevronLeft, X, Image, PieChart } from 'lucide-react';
+import { LuListTodo } from "react-icons/lu"
+
 
 type ProjectSection = 'software' | 'hardware';
 
@@ -149,7 +151,7 @@ const Portfolio = () => {
           "Database MongoDB"
         ],
         color: "from-green-500 to-teal-500",
-        icon: <Zap className="w-6 h-6" />,
+        icon: <LuListTodo className="w-6 h-6" />,
         image: "/images/Software/Todolist/web.png",
         status: "Completed",
         duration: "2 วัน",
@@ -169,7 +171,48 @@ const Portfolio = () => {
         demo : "https://todolist-project-flax.vercel.app/",
         github : "https://github.com/wattanaiyodc/todolist-project"
         
+      },
+      {
+        id: "SW-006",
+        title: "Expense Tracker (Full-Stack)",
+        description: "ระบบติดตามรายรับรายจ่าย เชื่อมต่อ Frontend ด้วย Next.js และ Backend ด้วย Express จัดเก็บข้อมูลบน SQLite พร้อมระบบ Login ด้วย JWT",
+        tech: [
+          "Next.js Framework (Frontend)",
+          "Tailwind CSS",
+          "TypeScript + JSX",
+          "Node.js + Express (Backend)",
+          "REST API + JWT Authentication",
+          "Prisma ORM",
+          "Database SQLite"
+        ],
+        color: "from-emerald-500 to-teal-500",
+        icon: <LuListTodo className="w-6 h-6" />,
+        image: "/images/Software/ExpenseTracker/web.png",
+        status: "In Progress",
+        duration: "1 สัปดาห์",
+        team: "1 คน",
+        details: {
+          overview: "แอปสำหรับบันทึกรายรับ/รายจ่าย พร้อมแดชบอร์ดสรุปผลและกราฟช่วงเวลา 3 และ 6 เดือน มีระบบ Authentication ด้วย JWT สามารถจัดการผู้ใช้ และจำกัดการเข้าถึง API ตาม token",
+          features: [
+            "ระบบ Login / Register ด้วย JWT Authentication",
+            "บันทึกรายจ่าย/รายรับ (Create Income/Expense)",
+            "ดู/ค้นหา/แก้ไข/ลบ รายการ (CRUD Items)",
+            "กราฟสรุปแนวโน้ม 3 และ 6 เดือน (Line/Bar Chart)",
+            "สรุปยอดรายเดือนและจำแนกตามหมวดหมู่",
+            "เพิ่ม/ลบ/แก้ไข Category ของรายจ่ายและรายรับ",
+            "Category เริ่มต้น เช่น อาหาร, เดินทาง, บันเทิง, เงินเดือน, ฟรีแลนซ์",
+            "REST API สำหรับเชื่อมต่อกับ Frontend โดยใช้ Express",
+            "Prisma ORM เชื่อมต่อฐานข้อมูล SQLite"
+          ],
+          challenges: "การออกแบบระบบ JWT Authentication ที่ปลอดภัย ทั้งฝั่ง Frontend (เก็บ token, redirect เมื่อหมดอายุ) และ Backend (middleware ตรวจสอบสิทธิ์), รวมถึงการปรับ schema Prisma สำหรับ SQLite เพื่อรองรับผู้ใช้หลายคน",
+          results: "ได้ระบบ Full-Stack ที่แยกชั้นงานชัดเจน เชื่อมต่อ API กับ Frontend ได้ครบ มีระบบ Login/Register พร้อม JWT Authentication และแสดงข้อมูลรายรับรายจ่ายในรูปแบบกราฟ 🎯"
+        },
+        demo: "กำลังอัปเดต (ใช้ SQLite สำหรับ demo portfolio)",
+        github: "กำลังอัปเดต"
       }
+
+
+
     ],
     hardware: [
       {
