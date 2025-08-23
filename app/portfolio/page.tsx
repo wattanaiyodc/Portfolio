@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, Code, Cpu, Gitlab, Github , ExternalLink, Zap, Sparkles, Calendar, Users, Star, Lock, ChevronLeft, X, Image, PieChart } from 'lucide-react';
+import { ChevronRight, Code, Cpu, Gitlab, Github , ExternalLink, Zap, Sparkles, Calendar, Users, Star, Lock, ChevronLeft, X, Image } from 'lucide-react';
 import { LuListTodo } from "react-icons/lu"
 
 
