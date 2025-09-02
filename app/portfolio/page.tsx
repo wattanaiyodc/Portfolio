@@ -90,7 +90,7 @@ const Portfolio = () => {
         id: "SW-002",
         title: "Tic-Tac-Toe",
         description: "Tic-Tac-Toe เป็นเกมกระดาน 3x3 สำหรับผู้เล่น 2 คน ผลัดกันวาง X และ O เป้าหมายคือเรียงสัญลักษณ์ให้ได้ 3 ตัวติดกันในแนวนอน แนวตั้ง หรือแนวทแยง",
-        tech: ["KUKA Robot", "Python" , "CV" , "Node.js" , "PLC" , "AI"],
+        tech: ["KUKA Robot", "Python" , "CV" , "Node-RED" , "PLC" , "AI"],
         color: "from-orange-500 to-red-500",
         icon: <Cpu className="w-6 h-6" />,
         image: "/images/Hardware/Tic-Tac-Toe/board.jpg",
